@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All-in-One Converter | File & Unit Conversions</title>
+    <meta name="description" content="Free online tool for converting between various file formats (JPG, PNG, PDF) and unit measurements (temperature, weight, length, volume). No downloads required.">
+    <meta name="keywords" content="converter, file converter, unit converter, JPG to PNG, PNG to JPG, PDF to image, image to PDF, temperature converter, weight converter, length converter, volume converter">
+    <meta name="author" content="All-in-One Converter">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourusername.github.io/all-in-one-converter/">
+    <meta property="og:title" content="All-in-One Converter | File & Unit Conversions">
+    <meta property="og:description" content="Free online tool for converting between various file formats and unit measurements. No downloads required.">
+    <meta property="og:image" content="https://yourusername.github.io/all-in-one-converter/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourusername.github.io/all-in-one-converter/">
+    <meta property="twitter:title" content="All-in-One Converter | File & Unit Conversions">
+    <meta property="twitter:description" content="Free online tool for converting between various file formats and unit measurements. No downloads required.">
+    <meta property="twitter:image" content="https://yourusername.github.io/all-in-one-converter/og-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourusername.github.io/all-in-one-converter/">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PDF.js for PDF handling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <!-- jsPDF for creating PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span class="highlight">All-in-One</span> <span class="highlight-2">Converter</span></h1>
+            <p>Free, fast, and secure conversions for all your needs</p>
+        </header>
+
+        <div class="category-tabs">
+            <button class="category-btn active" data-category="file">File Conversions</button>
+            <button class="category-btn" data-category="unit">Unit Conversions</button>
+        </div>
+
+        <div class="converter-container">
+            <!-- File Conversion Section -->
+            <div class="category-content active" id="file-conversions">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="jpg-to-png">JPG to PNG</button>
+                    <button class="tab-btn" data-tab="png-to-jpg">PNG to JPG</button>
+                    <button class="tab-btn" data-tab="pdf-to-img">PDF to Image</button>
+                    <button class="tab-btn" data-tab="img-to-pdf">Image to PDF</button>
+                </div>
+
+                <div class="tab-content active" id="jpg-to-png">
+                    <h3>Convert JPG to PNG</h3>
+                    <div class="upload-area" id="uploadAreaJpgToPng">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop JPG Files Here</h3>
+                        <p>or</p>
+                        <label for="fileInputJpgToPng" class="upload-btn">Browse Files</label>
+                        <input type="file" id="fileInputJpgToPng" accept=".jpg,.jpeg" multiple hidden>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="png-to-jpg">
+                    <h3>Convert PNG to JPG</h3>
+                    <div class="upload-area" id="uploadAreaPngToJpg">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop PNG Files Here</h3>
+                        <p>or</p>
+                        <label for="fileInputPngToJpg" class="upload-btn">Browse Files</label>
+                        <input type="file" id="fileInputPngToJpg" accept=".png" multiple hidden>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="pdf-to-img">
+                    <h3>Convert PDF to Image</h3>
+                    <div class="upload-area" id="uploadAreaPdfToImg">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop PDF Files Here</h3>
+                        <p>or</p>
+                        <label for="fileInputPdfToImg" class="upload-btn">Browse Files</label>
+                        <input type="file" id="fileInputPdfToImg" accept=".pdf" multiple hidden>
+                    </div>
+                    <div class="format-options">
+                        <p>Output Format:</p>
+                        <div class="radio-group">
+                            <input type="radio" id="pdfToPng" name="pdfOutputFormat" value="png" checked>
+                            <label for="pdfToPng">PNG</label>
+                            <input type="radio" id="pdfToJpg" name="pdfOutputFormat" value="jpg">
+                            <label for="pdfToJpg">JPG</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="img-to-pdf">
+                    <h3>Convert Images to PDF</h3>
+                    <div class="upload-area" id="uploadAreaImgToPdf">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drag & Drop Image Files Here</h3>
+                        <p>or</p>
+                        <label for="fileInputImgToPdf" class="upload-btn">Browse Files</label>
+                        <input type="file" id="fileInputImgToPdf" accept=".jpg,.jpeg,.png" multiple hidden>
+                    </div>
+                    <div class="pdf-options">
+                        <div class="option-group">
+                            <label for="pdfName">PDF Filename:</label>
+                            <input type="text" id="pdfName" placeholder="converted_document" value="converted_document">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="file-list" id="fileList">
+                    <h3>Selected Files</h3>
+                    <ul id="files"></ul>
+                </div>
+                
+                <button id="convertBtn" class="convert-btn">Convert Files</button>
+            </div>
+
+            <!-- Unit Conversion Section -->
+            <div class="category-content" id="unit-conversions">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="temperature">Temperature</button>
+                    <button class="tab-btn" data-tab="weight">Weight</button>
+                    <button class="tab-btn" data-tab="length">Length</button>
+                    <button class="tab-btn" data-tab="volume">Volume</button>
+                </div>
+
+                <div class="tab-content active" id="temperature">
+                    <h3>Temperature Conversion</h3>
+                    <div class="unit-converter">
+                        <div class="unit-input-group">
+                            <input type="number" id="tempInput" placeholder="Enter value">
+                            <select id="tempFromUnit">
+                                <option value="celsius">Celsius (°C)</option>
+                                <option value="fahrenheit">Fahrenheit (°F)</option>
+                                <option value="kelvin">Kelvin (K)</option>
+                            </select>
+                        </div>
+                        <div class="swap-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="unit-input-group">
+                            <input type="number" id="tempResult" placeholder="Result" readonly>
+                            <select id="tempToUnit">
+                                <option value="fahrenheit">Fahrenheit (°F)</option>
+                                <option value="celsius">Celsius (°C)</option>
+                                <option value="kelvin">Kelvin (K)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="convertTempBtn" class="convert-btn">Convert</button>
+                    <div class="conversion-formula">
+                        <h4>Conversion Formula:</h4>
+                        <p id="tempFormula">°F = (°C × 9/5) + 32</p>
+                        <span class="formula-hint">The formula will update based on your selection</span>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="weight">
+                    <h3>Weight Conversion</h3>
+                    <div class="unit-converter">
+                        <div class="unit-input-group">
+                            <input type="number" id="weightInput" placeholder="Enter value">
+                            <select id="weightFromUnit">
+                                <option value="kg">Kilograms (kg)</option>
+                                <option value="g">Grams (g)</option>
+                                <option value="lb">Pounds (lb)</option>
+                                <option value="oz">Ounces (oz)</option>
+                            </select>
+                        </div>
+                        <div class="swap-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="unit-input-group">
+                            <input type="number" id="weightResult" placeholder="Result" readonly>
+                            <select id="weightToUnit">
+                                <option value="lb">Pounds (lb)</option>
+                                <option value="kg">Kilograms (kg)</option>
+                                <option value="g">Grams (g)</option>
+                                <option value="oz">Ounces (oz)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="convertWeightBtn" class="convert-btn">Convert</button>
+                    <div class="conversion-formula">
+                        <h4>Conversion Formula:</h4>
+                        <p id="weightFormula">lb = kg × 2.20462</p>
+                        <span class="formula-hint">The formula will update based on your selection</span>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="length">
+                    <h3>Length Conversion</h3>
+                    <div class="unit-converter">
+                        <div class="unit-input-group">
+                            <input type="number" id="lengthInput" placeholder="Enter value">
+                            <select id="lengthFromUnit">
+                                <option value="m">Meters (m)</option>
+                                <option value="km">Kilometers (km)</option>
+                                <option value="cm">Centimeters (cm)</option>
+                                <option value="mm">Millimeters (mm)</option>
+                                <option value="ft">Feet (ft)</option>
+                                <option value="in">Inches (in)</option>
+                                <option value="yd">Yards (yd)</option>
+                                <option value="mi">Miles (mi)</option>
+                            </select>
+                        </div>
+                        <div class="swap-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="unit-input-group">
+                            <input type="number" id="lengthResult" placeholder="Result" readonly>
+                            <select id="lengthToUnit">
+                                <option value="ft">Feet (ft)</option>
+                                <option value="m">Meters (m)</option>
+                                <option value="km">Kilometers (km)</option>
+                                <option value="cm">Centimeters (cm)</option>
+                                <option value="mm">Millimeters (mm)</option>
+                                <option value="in">Inches (in)</option>
+                                <option value="yd">Yards (yd)</option>
+                                <option value="mi">Miles (mi)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="convertLengthBtn" class="convert-btn">Convert</button>
+                    <div class="conversion-formula">
+                        <h4>Conversion Formula:</h4>
+                        <p id="lengthFormula">ft = m × 3.28084</p>
+                        <span class="formula-hint">The formula will update based on your selection</span>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="volume">
+                    <h3>Volume Conversion</h3>
+                    <div class="unit-converter">
+                        <div class="unit-input-group">
+                            <input type="number" id="volumeInput" placeholder="Enter value">
+                            <select id="volumeFromUnit">
+                                <option value="l">Liters (L)</option>
+                                <option value="ml">Milliliters (mL)</option>
+                                <option value="gal">Gallons (gal)</option>
+                                <option value="qt">Quarts (qt)</option>
+                                <option value="pt">Pints (pt)</option>
+                                <option value="cup">Cups</option>
+                                <option value="oz">Fluid Ounces (fl oz)</option>
+                                <option value="tbsp">Tablespoons</option>
+                                <option value="tsp">Teaspoons</option>
+                            </select>
+                        </div>
+                        <div class="swap-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="unit-input-group">
+                            <input type="number" id="volumeResult" placeholder="Result" readonly>
+                            <select id="volumeToUnit">
+                                <option value="gal">Gallons (gal)</option>
+                                <option value="l">Liters (L)</option>
+                                <option value="ml">Milliliters (mL)</option>
+                                <option value="qt">Quarts (qt)</option>
+                                <option value="pt">Pints (pt)</option>
+                                <option value="cup">Cups</option>
+                                <option value="oz">Fluid Ounces (fl oz)</option>
+                                <option value="tbsp">Tablespoons</option>
+                                <option value="tsp">Teaspoons</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button id="convertVolumeBtn" class="convert-btn">Convert</button>
+                    <div class="conversion-formula">
+                        <h4>Conversion Formula:</h4>
+                        <p id="volumeFormula">gal = L × 0.264172</p>
+                        <span class="formula-hint">The formula will update based on your selection</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-bolt"></i>
+                <h3>Fast Conversion</h3>
+                <p>Convert your files and units instantly</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-lock"></i>
+                <h3>Secure</h3>
+                <p>Your data never leaves your device</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-magic"></i>
+                <h3>High Quality</h3>
+                <p>Precise conversions with accurate results</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-exchange-alt"></i>
+                <h3>Multiple Formats</h3>
+                <p>Convert between various file formats and units</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading" id="loadingSpinner">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 All-in-One Converter. All rights reserved. | <a href="sitemap.html" style="color: #6c757d; text-decoration: underline;">Sitemap</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+    
+    <!-- JSON-LD for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "All-in-One Converter",
+      "url": "https://yourusername.github.io/all-in-one-converter/",
+      "description": "Free online tool for converting between various file formats (JPG, PNG, PDF) and unit measurements (temperature, weight, length, volume).",
+      "applicationCategory": "Utility",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Convert JPG to PNG and vice versa",
+        "Convert PDF to image formats",
+        "Convert images to PDF",
+        "Temperature unit conversion",
+        "Weight unit conversion",
+        "Length unit conversion",
+        "Volume unit conversion"
+      ],
+      "screenshot": "https://yourusername.github.io/all-in-one-converter/screenshot.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "All-in-One Converter Developer"
+      }
+    }
+    </script>
+</body>
+</html> 
